@@ -1,0 +1,42 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Using Include="DynamicData" />
+    <Using Include="GalaSoft.MvvmLight.Ioc" />
+    <Using Include="MvvmDialogs" />
+    <Using Include="ReactiveUI" />
+    <Using Include="YoutubeDLSharp" />
+    <Using Include="YoutubeDLSharp.Metadata" />
+    <Using Include="System.Collections.ObjectModel" />
+    <Using Include="System.Reactive.Linq" />
+    <Using Include="System.Text.RegularExpressions" />
+    <Using Include="System.Windows" />
+    <Using Include="System.Windows.Input" />
+    <Using Include="System.Windows.Data" />
+    <Using Include="VideoDownloader.Models" />
+    <Using Include="VideoDownloader.ViewModels" />
+    <Using Include="VideoDownloader.Views" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MvvmDialogs" Version="8.0.0" />
+    <PackageReference Include="MvvmLightLibsStd10" Version="5.4.1.1" />
+    <PackageReference Include="ReactiveUI.Wpf" Version="17.1.9" />
+    <PackageReference Include="YoutubeDLSharp" Version="0.4.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="runtime\*">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>

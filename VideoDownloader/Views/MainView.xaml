@@ -23,7 +23,7 @@
                         <Grid.RowDefinitions>
                             <RowDefinition Height="auto"/>
                             <RowDefinition Height="auto"/>
-                            <RowDefinition Height="15"/>
+                            <RowDefinition Height="auto"/>
                         </Grid.RowDefinitions>
                         <Grid.Resources>
                             <Style x:Key="SpacerStyle" TargetType="TextBlock">
@@ -36,11 +36,14 @@
                             <TextBlock Style="{StaticResource SpacerStyle}" Text="{Binding Duration}"/>
                             <TextBlock Style="{StaticResource SpacerStyle}" Text="{Binding Size, Converter={StaticResource SizeConverter}}"/>
                             <TextBlock Style="{StaticResource SpacerStyle}" Text="{Binding State}"/>
-                            <TextBlock Style="{StaticResource SpacerStyle}" Text="{Binding SpeedMBs, StringFormat={}{0:0.00}MB/s}"/>
-                            <TextBlock Style="{StaticResource SpacerStyle}" Text="{Binding ETA}"/>
+                            <TextBlock Style="{StaticResource SpacerStyle}" Text="{Binding SpeedMBs, StringFormat={}{0:0.00}MB/s}"
+                                       Visibility="{Binding State, Converter={StaticResource HideIfCompleteConverter}}"/>
+                            <TextBlock Style="{StaticResource SpacerStyle}" Text="{Binding ETA}"
+                                       Visibility="{Binding State, Converter={StaticResource HideIfCompleteConverter}}"/>
                             <TextBlock Style="{StaticResource SpacerStyle}" Text="{Binding Format}"/>
                         </StackPanel>
-                        <ProgressBar Grid.Row="2" Maximum="1" Value="{Binding Completion}"/>
+                        <ProgressBar Grid.Row="2" Maximum="1" Value="{Binding Completion}" MinHeight="15"
+                                     Visibility="{Binding State, Converter={StaticResource HideIfCompleteConverter}}"/>
                     </Grid>
                 </DataTemplate>
             </ListBox.ItemTemplate>

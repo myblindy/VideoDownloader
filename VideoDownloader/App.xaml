@@ -10,6 +10,7 @@
              StartupUri="Views/MainView.xaml">
     <Application.Resources>
         <conv:SizeConverter x:Key="SizeConverter"/>
+        <conv:HideIfCompleteConverter x:Key="HideIfCompleteConverter"/>
         <viewmodels:ViewModelLocator x:Key="Locator" d:IsDataSource="True"/>
     </Application.Resources>
 </Application>

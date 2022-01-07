@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System.IO;
+using System.Linq;
+using VideoDownloader.Properties;
 
 namespace VideoDownloader.ViewModels;
 
@@ -34,17 +36,20 @@ class AddNewViewModel : ReactiveObject, IModalDialogViewModel
                     SelectedFormat = Formats.FirstOrDefault();
                     SelectedSubtitles = Subtitles.Where(s => Regex.IsMatch(s, @"^en(?:\b|[_])"));
 
-                    Video.DownloadPath = Regex.Replace(Video.Name, $@"[{string.Join('|', System.IO.Path.GetInvalidPathChars().Select(c => Regex.Escape(c.ToString())))}]+", " ")
+                    var fn = Regex.Replace(Video.Name, $@"({string.Join('|', Path.GetInvalidFileNameChars().Select(c => Regex.Escape(c.ToString())))})+", " ")
                         + "." + data.Data.Extension;
+                    Video.DownloadPath = string.IsNullOrWhiteSpace(Settings.Default.LastOutputFolder) ? fn : Path.Combine(Settings.Default.LastOutputFolder, fn);
                 }
             });
         }, cancellationTokenSource.Token);
 
         BrowseOutputCommand = ReactiveCommand.Create(() =>
         {
+            var ext = Path.GetExtension(Video.DownloadPath);
             MvvmDialogs.FrameworkDialogs.SaveFile.SaveFileDialogSettings settings = new()
             {
                 FileName = Video.DownloadPath,
+                Filter = $"{ext} Files|*.{ext}|All Files|*.*",
             };
             if (dialogService.ShowSaveFileDialog(this, settings) == true)
                 Video.DownloadPath = settings.FileName;
@@ -52,6 +57,9 @@ class AddNewViewModel : ReactiveObject, IModalDialogViewModel
 
         DownloadCommand = ReactiveCommand.Create(() =>
         {
+            Settings.Default.LastOutputFolder = string.IsNullOrWhiteSpace(Video.DownloadPath) ? null : Path.GetDirectoryName(Video.DownloadPath);
+            Settings.Default.Save();
+
             Video.Size = SelectedFormat!.FileSize!.Value;
             DialogResult = true;
         }, this.WhenAnyValue(x => x.Success).Select(s => s == true));

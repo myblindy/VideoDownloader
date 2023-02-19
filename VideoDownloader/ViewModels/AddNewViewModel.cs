@@ -49,7 +49,7 @@ class AddNewViewModel : ReactiveObject, IModalDialogViewModel
             MvvmDialogs.FrameworkDialogs.SaveFile.SaveFileDialogSettings settings = new()
             {
                 FileName = Video.DownloadPath,
-                Filter = $"{ext} Files|*.{ext}|All Files|*.*",
+                Filter = $"{ext} Files|*{ext}|All Files|*.*",
             };
             if (dialogService.ShowSaveFileDialog(this, settings) == true)
                 Video.DownloadPath = settings.FileName;

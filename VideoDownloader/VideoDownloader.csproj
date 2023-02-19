@@ -27,10 +27,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="MvvmDialogs" Version="8.0.0" />
+    <PackageReference Include="MvvmDialogs" Version="9.1.0" />
     <PackageReference Include="MvvmLightLibsStd10" Version="5.4.1.1" />
-    <PackageReference Include="ReactiveUI.Wpf" Version="17.1.9" />
-    <PackageReference Include="YoutubeDLSharp" Version="0.4.0" />
+    <PackageReference Include="ReactiveUI.Wpf" Version="18.4.22" />
+    <PackageReference Include="YoutubeDLSharp" Version="1.0.0-beta3" />
   </ItemGroup>
 
   <ItemGroup>

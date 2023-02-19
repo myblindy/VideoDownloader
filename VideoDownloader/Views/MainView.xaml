@@ -16,8 +16,8 @@
             <Button Command="{Binding PasteCommand}">Paste</Button>
         </ToolBar>
 
-        <ListBox ItemsSource="{Binding Videos}" d:ItemsSource="{d:SampleData ItemCount=5}" HorizontalContentAlignment="Stretch">
-            <ListBox.ItemTemplate>
+        <ItemsControl ItemsSource="{Binding Videos}" d:ItemsSource="{d:SampleData ItemCount=5}" HorizontalContentAlignment="Stretch">
+            <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <Grid>
                         <Grid.RowDefinitions>
@@ -31,7 +31,7 @@
                             </Style>
                         </Grid.Resources>
 
-                        <TextBlock Grid.Row="0" Text="{Binding Name}" FontWeight="Bold"/>
+                        <TextBlock Grid.Row="0" Text="{Binding Name}" FontWeight="Bold" TextTrimming="WordEllipsis" />
                         <StackPanel Grid.Row="1" Orientation="Horizontal">
                             <TextBlock Style="{StaticResource SpacerStyle}" Text="{Binding Duration}"/>
                             <TextBlock Style="{StaticResource SpacerStyle}" Text="{Binding Size, Converter={StaticResource SizeConverter}}"/>
@@ -46,7 +46,7 @@
                                      Visibility="{Binding State, Converter={StaticResource HideIfCompleteConverter}}"/>
                     </Grid>
                 </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
     </DockPanel>
 </Window>

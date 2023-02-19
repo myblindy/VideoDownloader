@@ -47,7 +47,7 @@ class MainViewModel : ReactiveObject
                         {
                             Output = newVM.Video.DownloadPath,
                             EmbedSubs = true,
-                            SubLang = newVM.SelectedSubtitles is null ? null : string.Join(',', newVM.SelectedSubtitles),
+                            SubLangs = newVM.SelectedSubtitles is null ? null : string.Join(',', newVM.SelectedSubtitles),
                         });
                 }
             }

@@ -31,7 +31,7 @@
                             </Style>
                         </Grid.Resources>
 
-                        <TextBlock Grid.Row="0" Text="{Binding Name}" FontWeight="Bold" TextTrimming="WordEllipsis" />
+                        <TextBlock Grid.Row="0" Text="{Binding Name}" FontWeight="Bold" TextWrapping="Wrap" />
                         <StackPanel Grid.Row="1" Orientation="Horizontal">
                             <TextBlock Style="{StaticResource SpacerStyle}" Text="{Binding Duration}"/>
                             <TextBlock Style="{StaticResource SpacerStyle}" Text="{Binding Size, Converter={StaticResource SizeConverter}}"/>

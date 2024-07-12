@@ -42,7 +42,7 @@ class MainViewModel : ReactiveObject
                     });
 
                     await App.YoutubeDL.RunVideoDownload(newVM.Video.Uri.ToString(),
-                        newVM.SelectedFormat!.AudioBitrate.HasValue ? newVM.SelectedFormat!.FormatId : $"{newVM.SelectedFormat!.FormatId}+bestaudio", progress: progress,
+                        newVM.SelectedFormat!.AudioBitrate > 0 ? newVM.SelectedFormat!.FormatId : $"{newVM.SelectedFormat!.FormatId}+bestaudio", progress: progress,
                         overrideOptions: new()
                         {
                             Output = newVM.Video.DownloadPath,

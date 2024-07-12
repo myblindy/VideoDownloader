@@ -1,5 +1,4 @@
 ﻿using System.IO;
-using System.Linq;
 using VideoDownloader.Properties;
 
 namespace VideoDownloader.ViewModels;

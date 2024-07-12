@@ -58,9 +58,22 @@
             <TextBox Text="{Binding Video.DownloadPath}"/>
         </DockPanel>
 
+        <Grid Grid.RowSpan="3" Grid.ColumnSpan="3" Background="{x:Static SystemColors.WindowBrush}"
+              Visibility="{Binding Success, Converter={StaticResource HideIfCompleteConverter}}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Row="1" Text="Please wait, querying video details..." HorizontalAlignment="Center"/>
+            <ProgressBar Grid.Row="2" IsIndeterminate="True" MinHeight="20" Margin="5,10"/>
+        </Grid>
+
         <StackPanel Grid.Row="3" Grid.ColumnSpan="3" Margin="5" Orientation="Horizontal" HorizontalAlignment="Right">
-            <Button Command="{Binding DownloadCommand}">Download</Button>
-            <Button Command="{Binding CancelCommand}">Cancel</Button>
+            <Button Command="{Binding DownloadCommand}" Padding="5" Margin="5">Download</Button>
+            <Button Command="{Binding CancelCommand}" Padding="5" Margin="5">Cancel</Button>
         </StackPanel>
     </Grid>
 </Window>

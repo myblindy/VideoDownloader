@@ -38,6 +38,8 @@
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Width" Binding="{Binding Width}"/>
                     <DataGridTextColumn Header="Height" Binding="{Binding Height}"/>
+                    <DataGridTextColumn Header="FPS" Binding="{Binding FrameRate}"/>
+                    <DataGridTextColumn Header="DR" Binding="{Binding DynamicRange}"/>
                     <DataGridTextColumn Header="VCodec" Binding="{Binding VideoCodec}"/>
                     <DataGridTextColumn Header="Container" Binding="{Binding Extension}"/>
                     <DataGridTextColumn Header="Size" Binding="{Binding FileSize, Converter={StaticResource SizeConverter}}"/>

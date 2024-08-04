@@ -28,8 +28,8 @@ class AddNewViewModel : ReactiveObject, IModalDialogViewModel
                     if (formatsRoot.Any() && formatsRoot.Any(f => f.FrameRate is not null))
                         formatsRoot = formatsRoot.Where(f => f.FrameRate is not null);
                     Formats.AddRange(formatsRoot
-                        .Where(f => f.FileSize is not null)
                         .OrderByDescending(f => f.FrameRate)
+                            .ThenBy(f => f.DynamicRange)
                             .ThenByDescending(f => f.Width * f.Height)
                             .ThenByDescending(f => f.ContainerFormat));
                     SelectedFormat = Formats.FirstOrDefault();
@@ -59,7 +59,7 @@ class AddNewViewModel : ReactiveObject, IModalDialogViewModel
             Settings.Default.LastOutputFolder = string.IsNullOrWhiteSpace(Video.DownloadPath) ? null : Path.GetDirectoryName(Video.DownloadPath);
             Settings.Default.Save();
 
-            Video.Size = SelectedFormat!.FileSize!.Value;
+            Video.Size = SelectedFormat!.FileSize ?? 0;
             DialogResult = true;
         }, this.WhenAnyValue(x => x.Success).Select(s => s == true));
 

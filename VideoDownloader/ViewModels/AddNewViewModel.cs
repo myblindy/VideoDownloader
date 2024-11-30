@@ -12,11 +12,7 @@ class AddNewViewModel : ReactiveObject, IModalDialogViewModel
 
         Task.Run(async () =>
         {
-            var data = await App.YoutubeDL.RunVideoDataFetch(uri.ToString(), cancellationTokenSource.Token,
-                overrideOptions: new YoutubeDLSharp.Options.OptionSet()
-                {
-
-                });
+            var data = await App.YoutubeDL.RunVideoDataFetch(uri.ToString(), cancellationTokenSource.Token);
 
             await Application.Current.Dispatcher.BeginInvoke(() =>
             {

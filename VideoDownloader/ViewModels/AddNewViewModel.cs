@@ -12,7 +12,11 @@ class AddNewViewModel : ReactiveObject, IModalDialogViewModel
 
         Task.Run(async () =>
         {
-            var data = await App.YoutubeDL.RunVideoDataFetch(uri.ToString(), cancellationTokenSource.Token);
+            var data = await App.YoutubeDL.RunVideoDataFetch(uri.ToString(), cancellationTokenSource.Token,
+                overrideOptions: new YoutubeDLSharp.Options.OptionSet()
+                {
+
+                });
 
             await Application.Current.Dispatcher.BeginInvoke(() =>
             {
@@ -32,6 +36,11 @@ class AddNewViewModel : ReactiveObject, IModalDialogViewModel
                             .ThenBy(f => f.DynamicRange)
                             .ThenByDescending(f => f.Width * f.Height)
                             .ThenByDescending(f => f.ContainerFormat));
+
+                    // use approximate file size if necessary
+                    foreach (var f in Formats)
+                        f.FileSize ??= f.ApproximateFileSize ?? (long)((data.Data.Duration ?? 0) * (f.Bitrate ?? f.VideoBitrate ?? 0) * 1024 / 8);
+
                     SelectedFormat = Formats.FirstOrDefault();
                     SelectedSubtitles = Subtitles.Where(s => Regex.IsMatch(s, @"^en(?:\b|[_])"));
 
@@ -48,7 +57,7 @@ class AddNewViewModel : ReactiveObject, IModalDialogViewModel
             MvvmDialogs.FrameworkDialogs.SaveFile.SaveFileDialogSettings settings = new()
             {
                 FileName = Video.DownloadPath,
-                Filter = $"{ext} Files|*{ext}|All Files|*.*",
+                Filter = $"{ext} Files|*{ext}|All Files|*",
             };
             if (dialogService.ShowSaveFileDialog(this, settings) == true)
                 Video.DownloadPath = settings.FileName;
